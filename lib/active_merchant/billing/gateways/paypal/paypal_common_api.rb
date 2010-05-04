@@ -8,7 +8,8 @@ module ActiveMerchant #:nodoc:
         base.cattr_accessor :signature
       end
       
-      API_VERSION = '59.0'
+      #API_VERSION = '59.0'
+      API_VERSION = '62.0'
       
       URLS = {
         :test => { :certificate => 'https://api.sandbox.paypal.com/2.0/',
@@ -262,6 +263,7 @@ module ActiveMerchant #:nodoc:
             xml << body
           end
         end
+        
         xml.target!
       end
      
@@ -296,7 +298,7 @@ module ActiveMerchant #:nodoc:
 
       def commit(action, request)
         response = parse(action, ssl_post(endpoint_url, build_request(request)))
-       
+
         build_response(successful?(response), message_from(response), response,
     	    :test => test?,
     	    :authorization => authorization_from(response),
